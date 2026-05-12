@@ -1,7 +1,7 @@
-local script_name = "gLPUi"
+local script_name = "__PKGNAME__"
 
 -- Main table
----@class GLPUI
+---@class __PKGNAME__
 ---@field config table
 ---@field event_handlers table
 ---@field metrics table
@@ -11,19 +11,19 @@ local script_name = "gLPUi"
 ---@field inventory_attributes table
 ---@field inventory table
 ---@field splitter table
-GLPUI = GLPUI or {
+__PKGNAME__ = __PKGNAME__ or {
   config = {
-    name = script_name,                                    -- Name of the script
-    package_name = "__PKGNAME__",                          -- Name of the package
+    name = script_name,                                     -- Name of the script
+    package_name = "__PKGNAME__",                           -- Name of the package
     package_path = getMudletHomeDir() .. "/__PKGNAME__/",
-    prefix = f [[{script_name}.]],                         -- Prefix for handlers
+    prefix = f [[{script_name}.]],                          -- Prefix for handlers
     preferences_file = f [[{script_name}.Preferences.lua]], -- Name of the preferences file
   },
   event_handlers = {},
   metrics = {
     height = 66,
     label_font_size = 10,
-    gauge_font_size = 10,
+    gaugeFontSize = 10,
     coin_font_size = 15,
     inventory_font_size = 8,
   },
@@ -82,9 +82,10 @@ GLPUI = GLPUI or {
   }
 }
 
-function GLPUI.setupStyles()
+function __PKGNAME__.setupStyles()
   -- Styles
   local MainBackground = "background-color: rgba(18,22,25,100%);"
+  -- local MainBackground = "background-color: red;"
   local border = "border-top: 1px solid rgba(255, 255, 255, 10%); border-bottom: 1px solid rgba(255, 255, 255, 10%);"
   local panel_border = "border: 1px solid rgba(255, 255, 255, 10%);"
   local fontColor = "color: rgba(192, 192, 192, 85%);"
@@ -92,16 +93,16 @@ function GLPUI.setupStyles()
   local right = "qproperty-alignment: 'AlignRight | AlignVCenter';"
   local labelFont = "Ubuntu"
   local gaugeFont = "Ubuntu"
-  local PlatinumRGB = f "rgb({table.concat(GLPUI.coin.colours.platinum, ',')})"
-  local GoldRGB = f "rgb({table.concat(GLPUI.coin.colours.gold, ',')})"
-  local SilverRGB = f "rgb({table.concat(GLPUI.coin.colours.silver, ',')})"
-  local CopperRGB = f "rgb({table.concat(GLPUI.coin.colours.copper, ',')})"
+  local PlatinumRGB = f "rgb({table.concat(__PKGNAME__.coin.colours.platinum, ',')})"
+  local GoldRGB = f "rgb({table.concat(__PKGNAME__.coin.colours.gold, ',')})"
+  local SilverRGB = f "rgb({table.concat(__PKGNAME__.coin.colours.silver, ',')})"
+  local CopperRGB = f "rgb({table.concat(__PKGNAME__.coin.colours.copper, ',')})"
   local labelText = f [[ font-weight: 400; {fontColor} background-color: rgba(0,0,0,0); ]]
   local gauge = "margin: 2.75px; border: 1px solid rgba(53, 53, 53, 75%);"
   local gaugeText = f [[ font-family: '{gaugeFont}'; {fontColor} {center} font-weight: 600; ]]
-  local splitter = f "color: rgb({table.concat(GLPUI.coin.colours.silver, ',')});"
+  local splitter = f "color: rgb({table.concat(__PKGNAME__.coin.colours.silver, ',')});"
 
-  GLPUI.styles = {
+  __PKGNAME__.styles = {
     MainFontName   = labelFont,
     WidgetFontName = gaugeFont,
     MainBG         = f [[ {MainBackground} {border} ]],
@@ -132,7 +133,7 @@ function GLPUI.setupStyles()
   local background_color = "rgb(18, 22, 25)"
   local border_color = "rgb(82, 100, 0)"
 
-  GLPUI.styles.Profile = [[
+  __PKGNAME__.styles.Profile = [[
     QMainWindow {
       background: ]] .. background_color .. [[;
     }
