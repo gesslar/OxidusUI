@@ -10,6 +10,7 @@ jobs:
     if: github.event.pull_request.merged == true
     uses: gesslar/Maint/.github/workflows/ReleaseMudlet.yaml@main
     with:
+      quality_check: ""
       inject_mupdate: false
     secrets: inherit
     permissions:
