@@ -1,4 +1,4 @@
-GLPUI.init_gmcp = function()
+__PKGNAME__.init_gmcp = function()
   tempTimer(1, function()
     sendGMCP("Char.Status")
     sendGMCP("Char.Vitals")
@@ -8,99 +8,99 @@ GLPUI.init_gmcp = function()
 end
 
 local function install(_, package)
-  if not GLPUI or package ~= GLPUI.config.package_name then return end
+  if not __PKGNAME__ or package ~= __PKGNAME__.config.package_name then return end
 
-  setBorderBottom(GLPUI.metrics.height)
-  cecho("<steel_blue>Thank you for installing gLPUi!\n")
+  setBorderBottom(__PKGNAME__.metrics.height)
+  cecho("<steel_blue>Thank you for installing __PKGNAME__!\n")
 
-  GLPUI.setupStyles()
-  GLPUI.buildUi()
-  setProfileStyleSheet(GLPUI.styles.Profile)
+  __PKGNAME__.setupStyles()
+  __PKGNAME__.buildUi()
+  setProfileStyleSheet(__PKGNAME__.styles.Profile)
 
   local host, port, status = getConnectionInfo()
   if host and port and status then
-    GLPUI.init_gmcp()
+    __PKGNAME__.init_gmcp()
   end
 end
 
 local function uninstall(_, package)
-  if not GLPUI or package ~= GLPUI.config.package_name then return end
+  if not __PKGNAME__ or package ~= __PKGNAME__.config.package_name then return end
 
   -- Delete all named event handlers
-  deleteAllNamedEventHandlers(GLPUI.config.package_name)
-  deleteAllNamedTimers(GLPUI.config.package_name)
+  deleteAllNamedEventHandlers(__PKGNAME__.config.package_name)
+  deleteAllNamedTimers(__PKGNAME__.config.package_name)
 
-  GLPUI.event_handlers = nil
+  __PKGNAME__.event_handlers = nil
 
-  GLPUI.PanelWindow:hide()
-  GLPUI.PanelWindow = nil
+  __PKGNAME__.PanelWindow:hide()
+  __PKGNAME__.PanelWindow = nil
 
   setBorderBottom(0)
 
-  GLPUI.MainContainer:hide()
-  GLPUI.MainContainer = nil
+  __PKGNAME__.MainContainer:hide()
+  __PKGNAME__.MainContainer = nil
 
-  cecho("<orange_red>You have uninstalled gLPUi.\n")
-  GLPUI = nil
+  cecho("<orange_red>You have uninstalled __PKGNAME__.\n")
+  __PKGNAME__ = nil
 end
 
 local function load(event)
-  GLPUI.setupStyles()
-  GLPUI.buildUi()
+  __PKGNAME__.setupStyles()
+  __PKGNAME__.buildUi()
 end
 
 local function connection(event)
-  GLPUI.init_gmcp()
+  __PKGNAME__.init_gmcp()
 end
 
 -- Register event handlers
 local function registerHandlers()
   local handler
 
-  handler = GLPUI.config.package_name .. ":Install"
+  handler = __PKGNAME__.config.package_name .. ":Install"
   registerNamedEventHandler(
-    GLPUI.config.package_name,
+    __PKGNAME__.config.package_name,
     handler,
     "sysInstallPackage",
     install,
     true
   ) -- We don't need to record this, as it is a oneshot.
 
-  handler = GLPUI.config.package_name .. ":Uninstall"
+  handler = __PKGNAME__.config.package_name .. ":Uninstall"
   if registerNamedEventHandler(
-    GLPUI.config.package_name,
-    handler,
-    "sysUninstallPackage",
-    uninstall,
-    true
-  ) then
-    GLPUI.event_handlers[#GLPUI.event_handlers + 1] = handler
+        __PKGNAME__.config.package_name,
+        handler,
+        "sysUninstallPackage",
+        uninstall,
+        true
+      ) then
+    __PKGNAME__.event_handlers[#__PKGNAME__.event_handlers + 1] = handler
   end
 
-  handler = GLPUI.config.package_name .. ":Load"
+  handler = __PKGNAME__.config.package_name .. ":Load"
   if registerNamedEventHandler(
-    GLPUI.config.package_name,
-    handler,
-    "sysLoadEvent",
-    load,
-    false
-  ) then
-    GLPUI.event_handlers[#GLPUI.event_handlers + 1] = handler
+        __PKGNAME__.config.package_name,
+        handler,
+        "sysLoadEvent",
+        load,
+        false
+      ) then
+    __PKGNAME__.event_handlers[#__PKGNAME__.event_handlers + 1] = handler
   end
 
-  handler = GLPUI.config.package_name .. ":Connection"
+  handler = __PKGNAME__.config.package_name .. ":Connection"
   if registerNamedEventHandler(
-    GLPUI.config.package_name,
-    handler,
-    "sysConnectionEvent",
-    connection,
-    false
-  ) then
-    GLPUI.event_handlers[#GLPUI.event_handlers + 1] = handler
+        __PKGNAME__.config.package_name,
+        handler,
+        "sysConnectionEvent",
+        connection,
+        false
+      ) then
+    __PKGNAME__.event_handlers[#__PKGNAME__.event_handlers + 1] = handler
   end
 end
 
-function GLPUI.UpdateBar(bar, value, max, text)
+function __PKGNAME__.UpdateBar(bar, value, max, text)
   -- We need at least these values to proceed
   if not bar or not value or not max then
     return

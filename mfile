@@ -1,10 +1,10 @@
 {
-       "package": "gLPUi",
-       "title": "Basic UI for gLPU",
-       "description": "Basic UI for gLPU",
-       "version": "1.7.0",
-       "author": "gesslar",
-       "icon": "",
-       "dependencies": "",
-       "outputFile": true
+  "package": "OxidusUI",
+  "title": "Basic UI for Oxidus mudlib",
+  "description": "Get some visuality with your textuality.",
+  "version": "1.7.1",
+  "author": "gesslar",
+  "icon": "",
+  "dependencies": "",
+  "outputFile": true
 }
